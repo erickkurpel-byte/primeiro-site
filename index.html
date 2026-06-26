@@ -3,87 +3,293 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Site do Corinthians</title>
+    <title>Timão Hub - O Portal do Corinthians</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
+        :root {
+            --cor-principal: #111111;
+            --cor-secundaria: #ffffff;
+            --cor-destaque: #bc9c22; /* Dourado dos detalhes de títulos */
+            --cor-cinza: #222222;
+            --cor-texto-suave: #aaaaaa;
+        }
+
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
-            color: #111;
         }
-        header {
-            background-color: #000;
-            color: #fff;
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--cor-principal);
+            color: var(--cor-secundaria);
+            line-height: 1.6;
+        }
+
+        /* Barra de Navegação */
+        nav {
+            background-color: #000000;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--cor-cinza);
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: var(--cor-secundaria);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--cor-texto-suave);
+        }
+
+        /* Banner Principal */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)), url('https://unsplash.com') no-repeat center center/cover;
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            padding: 2rem 0;
-            border-bottom: 5px solid #ccc;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 2.5rem;
-        }
-        header p {
-            margin: 0.5rem 0 0;
-            font-style: italic;
-        }
-        main {
-            max-width: 800px;
-            margin: 2rem auto;
             padding: 0 1rem;
         }
-        .card {
-            background: #fff;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            border-left: 5px solid #000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+
+        .hero h1 {
+            font-size: 3.5rem;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
         }
-        h2 {
-            color: #000;
-            margin-top: 0;
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            color: var(--cor-texto-suave);
         }
-        footer {
+
+        /* Seção de Conteúdo */
+        .container {
+            max-width: 1100px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .section-title {
             text-align: center;
-            padding: 2rem 0;
-            background-color: #000;
-            color: #fff;
-            margin-top: 3rem;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: var(--cor-secundaria);
+            margin: 0.5rem auto 0;
+        }
+
+        /* Grid de Notícias / Elenco */
+        .grid-noticias {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .card {
+            background-color: var(--cor-cinza);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            border: 1px solid #333;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .card-tag {
+            background-color: #fff;
+            color: #000;
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            text-transform: uppercase;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            margin: 0.8rem 0;
+        }
+
+        .card-text {
+            color: var(--cor-texto-suave);
+            font-size: 0.95rem;
+        }
+
+        /* Painel de Títulos Metrificado */
+        .grid-titulos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            text-align: center;
+        }
+
+        .titulo-box {
+            background-color: #050505;
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--cor-cinza);
+        }
+
+        .titulo-box .numero {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--cor-destaque);
+            display: block;
+        }
+
+        .titulo-box .nome-titulo {
+            font-size: 1rem;
+            text-transform: uppercase;
+            color: var(--cor-secundaria);
+            margin-top: 0.5rem;
+        }
+
+        /* Rodapé Moderno */
+        footer {
+            background-color: #000000;
+            padding: 3rem 1.5rem;
+            text-align: center;
+            border-top: 2px solid var(--cor-cinza);
+            margin-top: 4rem;
+        }
+
+        footer p {
+            color: var(--cor-texto-suave);
+            font-size: 0.9rem;
+        }
+
+        /* Responsividade para Celular */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            nav { flex-direction: column; gap: 1rem; }
+            nav ul { width: 100%; justify-content: center; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Sport Club Corinthians Paulista</h1>
-        <p>"Salve o Corinthians, o campeão dos campeões!"</p>
+    <!-- Navegação -->
+    <nav>
+        <div class="logo">TIMÃO HUB</div>
+        <ul>
+            <li><a href="#inicio">Início</a></li>
+            <li><a href="#noticias">Notícias</a></li>
+            <li><a href="#titulos">Conquistas</a></li>
+        </ul>
+    </nav>
+
+    <!-- Banner Principal -->
+    <header class="hero" id="inicio">
+        <h1>Bando de Loucos</h1>
+        <p>Acompanhe a história, as conquistas e o dia a dia do Sport Club Corinthians Paulista direto no seu portal independente.</p>
     </header>
 
-    <main>
-        <section class="card">
-            <h2>Bem-vindo ao meu site do Timão!</h2>
-            <p>Este é o meu primeiro site hospedado no GitHub, dedicado inteiramente ao Time do Povo.</p>
+    <div class="container">
+        
+        <!-- Seção Notícias Simuladas -->
+        <section id="noticias">
+            <h2 class="section-title">Últimas do Coringão</h2>
+            <div class="grid-noticias">
+                <article class="card">
+                    <div class="card-body">
+                        <span class="card-tag">Neo Química Arena</span>
+                        <h3 class="card-title">Casa do Povo lotada apóia o time do início ao fim</h3>
+                        <p class="card-text">Com recorde de público na temporada, a Fiel Torcida dá show nas arquibancadas e empurra o elenco em busca das vitórias.</p>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-body">
+                        <span class="card-tag">História</span>
+                        <h3 class="card-title">Os 110+ anos de Democracia e Luta Operária</h3>
+                        <p class="card-text">Entenda como a fundação em 1910 moldou o DNA do clube mais popular e engajado socialmente do futebol nacional.</p>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-body">
+                        <span class="card-tag">Base</span>
+                        <h3 class="card-title">Filhos do Terrão ganham espaço no elenco principal</h3>
+                        <p class="card-text">Novas promessas promovidas das categorias de base começam a ditar o ritmo dos treinamentos e buscam a titularidade.</p>
+                    </div>
+                </article>
+            </div>
         </section>
 
-        <section class="card">
-            <h2>Grandes Conquistas</h2>
-            <ul>
-                <li>Bicampeão Mundial da FIFA (2000 e 2012)</li>
-                <li>Campeão Invicto da Copa Libertadores (2012)</li>
-                <li>Heptacampeão Brasileiro</li>
-                <li>Maior Campeão Paulista</li>
-            </ul>
+        <!-- Seção Galeria de Títulos Grandes -->
+        <section id="titulos">
+            <h2 class="section-title">Galeria de Glórias</h2>
+            <div class="grid-titulos">
+                <div class="titulo-box">
+                    <span class="numero">2</span>
+                    <span class="nome-titulo">Mundiais da FIFA</span>
+                </div>
+                <div class="titulo-box">
+                    <span class="numero">1</span>
+                    <span class="nome-titulo">Libertadores Invicto</span>
+                </div>
+                <div class="titulo-box">
+                    <span class="numero">7</span>
+                    <span class="nome-titulo">Títulos Brasileiros</span>
+                </div>
+                <div class="titulo-box">
+                    <span class="numero">30+</span>
+                    <span class="nome-titulo">Campeonatos Paulistas</span>
+                </div>
+            </div>
         </section>
 
-        <section class="card">
-            <h2>História e Tradição</h2>
-            <p>Fundado em 1910 por operários no bairro do Bom Retiro, o Corinthians nasceu como o clube dos operários e se tornou a segunda maior torcida do Brasil, conhecida mundialmente pelo seu bando de loucos.</p>
-        </section>
-    </main>
+    </div>
 
+    <!-- Rodapé -->
     <footer>
-        <p>Desenvolvido por um corinthiano roxo no GitHub Pages.</p>
+        <p>&copy; 2026 Timão Hub. Desenvolvido no GitHub Pages por um membro do Bando de Loucos.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem;">Este site é um projeto pessoal sem fins lucrativos.</p>
     </footer>
 
 </body>
 </html>
+7777
